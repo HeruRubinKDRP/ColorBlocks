@@ -1,0 +1,64 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #1f1f1f;
+}
+
+.app {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+.gameGrid {
+    display: grid;
+    width: min(90vw, 500px);
+    aspect-ratio: 1;
+    gap: 12px;
+}
+
+.tile {
+    border: none;
+    border-radius: 12px;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+}
+
+.tile:hover {
+    opacity: 0.3;
+}
+
+.tile-salmon {
+    background: salmon;
+}
+
+.tile-green {
+    background: seagreen;
+}
+
+.tile-gold {
+    background: goldenrod;
+}
+
+.tile-black {
+    background: black;
+}
+
+.gameGrid {
+    display: grid;
+    width: min(90vw, 500px);
+    aspect-ratio: 1;
+    gap: 12px;
+    transform: scaleY(-1);
+}
+
+.tile {
+    transform: scaleY(-1);
+}
