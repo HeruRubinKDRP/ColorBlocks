@@ -1,0 +1,293 @@
+/* ==*=*=****===========================
+   Base / Layout
+===*********=****=========================== */
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    color: #121213;
+}
+
+.app {
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 32px 16px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    color: #bdbdbd;
+    margin-bottom: 24px;
+}
+
+/* =*=***=============================
+   Board
+===**=****=========================== */
+
+.board {
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 8px;
+    border: 1px solid grey;
+    border-radius: 12px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+/* =****=**=============================
+   Tiles
+====******=**========================== */
+
+.tile {
+    border-radius: 6px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 2px solid #3a3a3c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    background: #121213;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* --------==+===========
+/* Tile states */
+/* ======================
+ */
+
+.key.correct, .tile.correct {
+    background: linear-gradient(0deg, #4be00e, #84fa02);
+    border-color: hsl(121 100% 90% / 1);
+    color: #262626;
+}
+
+.key.present, .tile.present {
+    background: linear-gradient(0deg, #fee303, #fdf40b);
+    border-color: hsl(48.12deg 100% 90%);
+    color: #262626;
+}
+
+.tile.absent {
+    background: #3a3a3c;
+    border-color: #3a3a3c;
+    color: white;
+}
+
+/* ===============================
+   Keyboard showing guessed letters
+=============================== */
+
+.keyboard {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.keyboard-row {
+    display: flex;
+    gap: 6px;
+}
+
+.key {
+    min-width: 36px;
+    height: 48px;
+    padding: 0 10px;
+    border-radius: 4px;
+    background: #cccccc;
+    color: black;
+    font-weight: bold;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+}
+/* =*******=============
+/* Keyboard states */
+/* =******=*======================
+ */
+
+.key.correct {
+
+}
+
+.key.present {
+
+}
+
+.key.absent {
+    background: #3a3a3c;
+    color: white;
+}
+
+/* ===============================
+   Small cool factor stuff
+=============================== */
+
+/* Slight press effect for tiles */
+.tile:active {
+    transform: scale(0.96);
+}
+
+/* Prevent text selection while clicking */
+.tile,
+.key {
+    user-select: none;
+}
+
+/* ===============================
+   Image component related
+=============================== */
+
+
+
+.image-with-preview {
+    position: relative;
+    display: block;
+    overflow: hidden;
+}
+
+.image-preview,
+.image-full {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.image-preview {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    filter: blur(10px);
+    transform: scale(1.04);
+}
+
+.image-full {
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-full.loaded {
+    opacity: 1;
+}
+
+/* ===============================
+   Title related, includes animations
+=============================== */
+
+.title-container{
+    display: flex;
+    position: relative;
+    height: 200px;
+}
+
+.title-graphic, .not-graphic, .dont-sue{
+    object-fit: contain;
+    transform: translateX(-50%);
+}
+
+.title-graphic, .not-graphic, .dont-sue {
+    position: absolute;
+}
+
+@keyframes enterIn {
+    0%{
+        opacity: 0;
+        transform: scale(0) translateX(-20%);
+    }
+    90%{
+        left: 50%;
+        opacity: 1;
+        transform: scale(1.3) translateX(-50%);
+    }
+    95%{
+        left: 50%;
+        opacity: 1;
+        transform: scale(0.9) translateX(-50%);
+    }
+    97%{
+        left: 50%;
+        opacity: 1;
+        transform: scale(1.1) translateX(-50%);
+    }
+    100%{
+        left: 50%;
+        opacity: 1;
+        transform: scale(1) translateX(-50%) ;
+    }
+}
+
+@keyframes slideUp {
+    0%{
+        opacity: 0;
+        top: 75px;
+    }
+    50%{
+        opacity: 1;
+    }
+
+    100%{
+        top: 35px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    0%{
+        opacity: 0;
+        bottom: 75px;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        bottom: 25px;
+        opacity: 1;
+    }
+}
+
+.title-graphic{
+    opacity: 0;
+    top: 60px;
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    animation: enterIn .5s ease-in forwards;
+    animation-delay: 0.5s;
+}
+
+.not-graphic{
+    z-index: 5;
+    left: calc(50% - 90px);
+    top: 35px;
+    animation: slideUp .5s ease-in forwards;
+    animation-delay: 1s;
+    opacity: 0;
+}
+
+.dont-sue{
+    opacity: 0;
+    z-index: 5;
+    left: calc(50%);
+    bottom: 25px;
+    animation: slideDown .5s ease-in forwards;
+    animation-delay: 1.5s;
+}
