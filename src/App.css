@@ -35,8 +35,12 @@ body {
     opacity: 0.3;
 }
 
+.tile-blue{
+    background: #00448c;
+}
+
 .tile-salmon {
-    background: salmon;
+    background: #8a483f;
 }
 
 .tile-green {
